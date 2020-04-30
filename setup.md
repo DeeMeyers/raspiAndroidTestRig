@@ -22,12 +22,14 @@ I highly recomend downloading the Raspberry Pi Imager for Windows here:
 [https://www.raspberrypi.org/downloads/](https://www.raspberrypi.org/downloads/)
 The imager will walk you through flashing your microSD card and will download the RaspbianOS image for you as well.
 
-### Ading Configuration Files
+### Adding Configuration Files
 Once you are finshed flashing your SD card next we have to enable SSH. SSH is what allows us to connect to the raspi over our nextwork. It is 
 by default turned off. To enable it all we need to do is add a blank file titled `ssh` into the boot folder. 
 
 If you are unable to connect to you network via ethernet you will also need to configure in advance aswell. Just follow the directions laid out here:
 [https://www.raspberrypi.org/documentation/configuration/wireless/headless.md](https://www.raspberrypi.org/documentation/configuration/wireless/headless.md)
+
+A blank shh file and a copy of the template wpasupplicant.conf file are available in the root of this project. 
 
 ## Setting up your PC 
 
