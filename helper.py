@@ -1,5 +1,5 @@
 import paramiko
-import python-nmap
+import nmap
 import getpass
 
 class SSHCreds:
