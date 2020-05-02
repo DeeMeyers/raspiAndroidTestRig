@@ -1,5 +1,4 @@
 import paramiko
-import nmap
 import getpass
 import socket
 
@@ -8,8 +7,6 @@ class SSHCreds:
         print('Please enter the SSH credentials for your RaspberryPi')
         self.user = input("Username: ")
         self.password = getpass.getpass()
-    def __str__(self): 
-        return self.user, self.password
 
 
 def get_ip_address():
@@ -22,26 +19,32 @@ def get_ip_address():
 
 class GetAdresses:
     def __init__(self):
-        nm = nmap.PortScanner()
-        self.computer = {}
-        self.raspi = {}
-        print('Getting local ip adress:')
-        self.computer = get_ip_address()
-        print('Getting local address for raspi:')
-        try:
-            self.raspi = socket.gethostbyname('raspberrypi.local')
-            print(self.raspi)
-        except: 
-            print('raspi not found using raspberrypi.local')
-            exit()
-    
-    def __str__(self):
-        return self.raspi, self.computer
+        self.computer = ''
+        self.raspi = ''
+
+    def localip():
+            print('Getting local ip adress:')
+            self.computer = get_ip_address()
+            print(self.computer)
+            return self.computer
+    def raspberrypi():
+            print('Getting local address for raspi:')
+            try:
+                self.raspi = socket.gethostbyname('raspberrypi.local')
+                print(self.raspi)
+                return self.raspi
+            except: 
+                print('raspi not found using raspberrypi.local')
+                exit()
+
+
+class SSHClient:
+    def __init__(self, user, password, raspiAdress, localAdress):
+        pass
 
 
 class Helper:
     def __init__(self):
-        GetAdresses()
-        SSHCreds()
+        SSHClient(SSHCreds().user, SSHCreds().password, GetAdresses.raspberrypi(), GetAdresses.localip())
 
 Helper()
