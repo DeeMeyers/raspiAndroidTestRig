@@ -3,18 +3,13 @@ import getpass
 import socket
 
 
-def get_ip_address():
-    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    s.connect(("8.8.8.8", 80))
-    ip = s.getsockname()[0]
-    return ip
-
-
 class GetAdresses:
 
     def localip():
             print('Getting local ip adress:')
-            computer = get_ip_address()
+            temp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            temp.connect(("8.8.8.8", 80))
+            computer = temp.getsockname()[0]
             print(computer)
             return computer
     def raspberrypiFind():
