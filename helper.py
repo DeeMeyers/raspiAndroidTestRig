@@ -11,6 +11,7 @@ class SSHCreds:
     def __str__(self): 
         return self.user, self.password
 
+
 def get_ip_address():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.connect(("8.8.8.8", 80))
@@ -25,12 +26,22 @@ class GetAdresses:
         self.computer = {}
         self.raspi = {}
         print('Getting local ip adress:')
-        self.ip = get_ip_address()
+        self.computer = get_ip_address()
         print('Getting local address for raspi:')
         try:
             self.raspi = socket.gethostbyname('raspberrypi.local')
             print(self.raspi)
         except: 
             print('raspi not found using raspberrypi.local')
+            exit()
+    
+    def __str__(self):
+        return self.raspi, self.computer
 
-GetAdresses()
+
+class Helper:
+    def __init__(self):
+        GetAdresses()
+        SSHCreds()
+
+Helper()
