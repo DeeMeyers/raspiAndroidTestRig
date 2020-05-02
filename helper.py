@@ -29,8 +29,16 @@ class GetAdresses:
 
 
 class SSHClient:
-    def __init__(self, user, password, raspiAdress, localAdress):
-        pass
+    def __init__(self, user, psword, raspiAdress, localAdress):
+        with paramiko.SSHClient() as client:
+            client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+            try:
+                client.connect(raspiAdress, username=user, password=psword)
+                print('i connect')
+            except paramiko.ssh_exception.NoValidConnectionsError:
+                print("Connection failed")
+            client.close()
+            print('i close')
 
 
 class Helper:   
