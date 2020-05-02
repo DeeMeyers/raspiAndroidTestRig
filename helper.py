@@ -36,7 +36,9 @@ class SSHClient:
                 client.connect(raspiAdress, username=user, password=psword)
                 print('i connect')
             except paramiko.ssh_exception.NoValidConnectionsError:
-                print("Connection failed")
+                print("!!!Connection failed!!!")
+            except paramiko.ssh_exception.AuthenticationException:
+                print("!!!Username or password incorrect!!!")
             client.close()
             print('i close')
 
