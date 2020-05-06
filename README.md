@@ -10,5 +10,10 @@ At the end of the day I hope to able to run my project on a local server on my d
 using gtihub as a sort of engineering journal I will document my progress and keep track of the resources I use to accomplish my goal. 
 
 ## Current State
+5/6/20
+
+  Made a helper script that can find the ip of a raspi connected to local network, find your local ip adress, and open and close an ssh connection to the raspi. Now i need to have the script send a terminal command which should not be chalenging. The question I am facing now is should I have the user preinstall ADB on the raspi or use the script to check if it exists and install it if it does not exist. Or look into using adb python tools that already exist. Also I need to figure out if I can consistently detect the port a user is running their local server on or if I should ask for that information from the user directly. Considering that I am assuming the user can set up their own local server it may be practical to just ask for the information. 
+
 4/23/20
+
   Currently I am able to use putty on my desktop to load webpages onto a single device attached to the raspi. Next steps are to attach a second device via usb to the raspi and see if I can push the same command to both devices at the same time. I also plan on documenting how I got to here so anyone can also start the same setup. As it stands I'm simply using putty to use the raspi's command line to run ADB to communicate with an old amazon fire tablet. 
