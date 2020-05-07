@@ -28,16 +28,17 @@ class GetAdresses:
 
 
 class SSHClient:
-    def __init__(self, user, psword, raspiAdress, localAdress):
+    def __init__(self, user, psword, raspiAdress, localAdress, port):
         with paramiko.SSHClient() as client:
             client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
             try:
                 client.connect(raspiAdress, username=user, password=psword)
-                print('i connect')
-                # stdin,stdout,stderr = client.exec_command(f'adb shell am start -a android.intent.action.VIEW -d http://{localAdress}:{port}/')
+                print('connected client')
+                print('opening local server in browswer with ADB')
+                stdin,stdout,stderr = client.exec_command(f'adb shell am start -a android.intent.action.VIEW -d http://{localAdress}:{port}/')
                 chan = client.invoke_shell()
                 print(repr(client.get_transport()))
-                print("*** Here we go!\n")
+                print("*** opening shell on client ***\n")
                 interactive.interactive_shell(chan)
                 chan.close()
             except paramiko.ssh_exception.NoValidConnectionsError:
@@ -45,7 +46,7 @@ class SSHClient:
             except paramiko.ssh_exception.AuthenticationException:
                 print("!!!Username or password incorrect!!!")
             client.close()
-            print('i close')
+            print('client closed')
 
 
 class Helper:   
@@ -53,6 +54,8 @@ class Helper:
         print('Please enter the SSH credentials for your RaspberryPi')
         self.user = input("Username: ")
         self.password = getpass.getpass()
-        SSHClient(self.user, self.password, GetAdresses.raspberrypiFind(), GetAdresses.localip())
+        print('What port is your local server running on?')
+        self.port = input('port: ')
+        SSHClient(self.user, self.password, GetAdresses.raspberrypiFind(), GetAdresses.localip(), self.port)
 
 Helper()
