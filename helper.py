@@ -2,7 +2,6 @@ import paramiko
 import getpass
 import socket
 
-
 class GetAdresses:
 
     def localip():
@@ -24,12 +23,13 @@ class GetAdresses:
 
 
 class SSHClient:
-    def __init__(self, user, psword, raspiAdress, localAdress):
+    def __init__(self, user, psword, raspiAdress, localAdress, port):
         with paramiko.SSHClient() as client:
             client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
             try:
                 client.connect(raspiAdress, username=user, password=psword)
                 print('i connect')
+                stdin,stdout,stderr = client.exec_command(f'adb shell am start -a android.intent.action.VIEW -d http://{localAdress}:{port}/')
             except paramiko.ssh_exception.NoValidConnectionsError:
                 print("!!!Connection failed!!!")
             except paramiko.ssh_exception.AuthenticationException:
@@ -43,6 +43,9 @@ class Helper:
         print('Please enter the SSH credentials for your RaspberryPi')
         self.user = input("Username: ")
         self.password = getpass.getpass()
-        SSHClient(self.user, self.password, GetAdresses.raspberrypiFind(), GetAdresses.localip())
+        print("What port is your local server running on?")
+        self.port = input("Port: ")
+        SSHClient(self.user, self.password, GetAdresses.raspberrypiFind(), GetAdresses.localip(), self.port)
+
 
 Helper()
