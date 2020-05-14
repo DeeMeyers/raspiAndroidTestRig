@@ -42,6 +42,8 @@ class Helper:
         print('Please enter the SSH credentials for your RaspberryPi')
         self.user = input("Username: ")
         self.password = getpass.getpass()
+        if (self.user == 'pi' and self.password == 'raspberry'):
+            print("it looks like you're using the default username and password. It's recomended that you change them to something unique.")
         print("What port is your local server running on?")
         self.port = input("Port: ")
         SSHClient(self.user, self.password, GetAdresses.raspberrypiFind(), GetAdresses.localip(), self.port)
