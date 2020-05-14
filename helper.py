@@ -1,6 +1,11 @@
-import paramiko
 import getpass
 import socket
+import paramiko
+
+try:
+    import interactive
+except ImportError:
+    from . import interactive
 
 class GetAdresses:
     def localip():
@@ -27,14 +32,20 @@ class SSHClient:
             client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
             try:
                 client.connect(raspiAdress, username=user, password=psword)
-                print('i connect')
+                print('connected client')
+                print('opening local server in browswer with ADB')
                 stdin,stdout,stderr = client.exec_command(f'adb shell am start -a android.intent.action.VIEW -d http://{localAdress}:{port}/')
+                chan = client.invoke_shell()
+                print(repr(client.get_transport()))
+                print("*** opening shell on client ***\n")
+                interactive.interactive_shell(chan)
+                chan.close()
             except paramiko.ssh_exception.NoValidConnectionsError:
                 print("!!!Connection failed!!!")
             except paramiko.ssh_exception.AuthenticationException:
                 print("!!!Username or password incorrect!!!")
             client.close()
-            print('i close')
+            print('client closed')
 
 
 class Helper:   
