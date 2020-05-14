@@ -37,10 +37,10 @@ class SSHClient:
                 stdin,stdout,stderr = client.exec_command(f'adb shell am start -a android.intent.action.VIEW -d http://{localAdress}:{port}/')
                 err = stderr.readlines()
                 if err == ['error: no devices/emulators found\n']:
-                    print('!!!No Android devices found. Check they are plugged in and in developer mode!!!')
+                    print('!!!No Android devices found. Check they are plugged in and in developer mode!!!\n')
                 elif err != []:
                     print('!!!There was an error while trying to run adb (Android Debug Bridge)!!!')
-                    print('You can install adb but running in the terminal below:')
+                    print('You can install adb by running in the terminal below:\n')
                     print('sudo apt-get install adb')
                 chan = client.invoke_shell()
                 print(repr(client.get_transport()))
