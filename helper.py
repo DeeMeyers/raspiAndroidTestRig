@@ -8,7 +8,6 @@ except ImportError:
     from . import interactive
 
 class GetAdresses:
-
     def localip():
             print('Getting local ip adress:')
             temp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -54,8 +53,9 @@ class Helper:
         print('Please enter the SSH credentials for your RaspberryPi')
         self.user = input("Username: ")
         self.password = getpass.getpass()
-        print('What port is your local server running on?')
-        self.port = input('port: ')
+        print("What port is your local server running on?")
+        self.port = input("Port: ")
         SSHClient(self.user, self.password, GetAdresses.raspberrypiFind(), GetAdresses.localip(), self.port)
+
 
 Helper()

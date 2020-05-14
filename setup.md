@@ -12,6 +12,10 @@ resources have instructions and software for both mac and linux (debian mainly b
 - a USB cable to connect your device to the raspberrypi
 - that's it!
 
+## Before You Start
+
+This project is not intended for use on a network you don't control or for anything other than personal use. If your router is still using the default username and password or if you're unsure I would highly recomend finding out and changing it before starting. 
+
 ## Preparing Your RaspberryPi
 
 For this project we are going to use the Raspbian OS. Raspian is a Debian based unix operating system built specifically for the raspberrypi.
