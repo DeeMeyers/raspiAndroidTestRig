@@ -4,7 +4,6 @@ import socket
 
 
 class GetAdresses:
-
     def localip():
             print('Getting local ip adress:')
             temp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
