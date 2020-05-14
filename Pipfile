@@ -7,7 +7,6 @@ verify_ssl = true
 
 [packages]
 paramiko = "*"
-python-nmap = "*"
 interactive = "*"
 
 [requires]
